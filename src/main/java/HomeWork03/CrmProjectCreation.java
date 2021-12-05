@@ -15,7 +15,7 @@ import java.util.List;
  * Дата создания: 25.11.2021
  */
 
-public class ProjectCreation {
+public class CrmProjectCreation {
 
     public static void main(String[] args) throws InterruptedException {
 

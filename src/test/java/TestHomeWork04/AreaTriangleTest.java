@@ -1,5 +1,6 @@
-package HomeWork04;
+package TestHomeWork04;
 
+import HomeWork04.FunctionCalcAreaTriangle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

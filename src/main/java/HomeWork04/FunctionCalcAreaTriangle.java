@@ -28,6 +28,6 @@ public class FunctionCalcAreaTriangle {
 
     // Проверка валидности значений длин сторон
     public static boolean validLengths(int a, int b, int c) {
-        return ((a * b * c) > 0);
+        return (a > 0 && b > 0 && c > 0);
     }
 }

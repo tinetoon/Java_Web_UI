@@ -71,10 +71,10 @@ public class PersonalAccountEditingTest {
     @BeforeEach
     void authorization() {
 
-        logger.info("\n[INFO] Авторизации в личном кабинете");
+        logger.info("\n[INFO] Предварительная авторизация в личном кабинете перед выполнением теста");
         logger.debug("\n[DEBUG] Тестовые учётные данные: логин tinetoon@mail.ru, пароль te$st" +
                 "\n[DEBUG] Проверяем доступность страницы авторизации" +
-                "\n[DEBUG] Проверяем видимость ссылки \"Личный кабинет\"");
+                "\n[DEBUG] Проверяем title=\"Ъ - Личный кабинет\" страницы после авторизации");
 
         // Открываем страницу авторизации на сайте kommersant.ru
         Assertions
@@ -240,13 +240,33 @@ public class PersonalAccountEditingTest {
                         .visibilityOfElementLocated(By.xpath("//a[.='Личный кабинет']")));
 
         // Проверка данных поля "Должность"
-        Assertions.assertEquals("АО \"МЭС\"", webDriver
+        Assertions.assertEquals("Начальник ПТО", webDriver
                 .findElement(By.xpath("//p[contains(., 'Должность')]/span")).getText());
     }
 
     // Метод запускающийся после каждого теста
     @AfterEach
-    void exitTheBrowser() {
+    void SignOutOfAccount() {
+
+        // Получаем список элементов меню
+        menuList.clear();
+        menuList = webDriver
+                .findElements(By
+                        .xpath("//div[@class=\"account_menu hide_mobile\"]//span[@class=\"account_menu__name\"]"));
+
+        // Возвращаемся на страницу "Личный кабинет"
+        menuList.get(9).click();
+
+        // Устанавливаем паузу 5 секунд
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @AfterAll
+    static void exitTheBrowser() {
 
         // Закрываем браузер
         webDriver.quit();

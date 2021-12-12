@@ -7,6 +7,10 @@ package HomeWork04;
 
 public class FunctionCalcAreaTriangle {
 
+    public static void main(String[] args) {
+        System.out.println("Площадь треугольника: " + areaTriangle(3, 7, 5));
+    }
+
     // Функция возвращающая площадь треугольника по трём сторонам
     public static Double areaTriangle(int a, int b, int c) {
 

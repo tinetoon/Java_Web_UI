@@ -13,21 +13,21 @@ import org.slf4j.LoggerFactory;
 import java.time.Duration;
 
 /**
- * Класс для тестирования сайта kommersant.ru
+ * Класс для тестирования авторизации на сайте kommersant.ru
  * Ответственный за создание класса - А.А. Дюжаков
  * Дата создания: 11.12.2021
  *
- * Предусловия: авторизация на сайте с тестовой учётной записью (логин tinetoon@mail.ru, пароль te$st)
+ * Предусловия: авторизация проверка доступности главной страницы сайта
  * Постусловия: выход из учётной записи, либо очистка cookie
  */
 
-public class KommersantRuTest {
+public class AuthorizationTest {
 
     // Создаём экземпляр драйвера для возможности доступа к нему по всему классу
     private static ChromeDriver webDriver;
 
     // Создаём экземпляр логера
-    private static Logger logger = LoggerFactory.getLogger(KommersantRuTest.class);
+    private static Logger logger = LoggerFactory.getLogger(AuthorizationTest.class);
 
     /*
     Для подготовки и удаления тестовых данных используются методы:
@@ -92,7 +92,15 @@ public class KommersantRuTest {
 
         logger.info("\n[INFO] Проверка авторизации в личном кабинете");
         logger.debug("\n[DEBUG] Тестовые учётные данные: логин tinetoon@mail.ru, пароль te$st" +
+                "\n[DEBUG] Проверяем доступность страницы авторизации" +
                 "\n[DEBUG] Проверяем видимость ссылки \"Личный кабинет\"");
+
+        // Открываем страницу авторизации на сайте kommersant.ru
+        Assertions
+                .assertDoesNotThrow(()-> webDriver
+                        .navigate()
+                        .to("https://www.kommersant.ru/lk/login"),
+                        "Страница авторизации недоступна");
 
         // Заполняем поля "Ваш e-mail" и "Введите пароль"
         webDriver.findElement(By.id("email")).sendKeys("tinetoon@mail.ru");
@@ -106,7 +114,8 @@ public class KommersantRuTest {
                 .until(ExpectedConditions
                         .visibilityOfElementLocated(By.xpath("//a[.='Личный кабинет']")));
 
-        Assertions.assertEquals("Ъ - Личный кабинет", webDriver.getTitle());
+        Assertions.assertEquals("Ъ - Личный кабинет", webDriver.getTitle(),
+                "Страница \"Личный кабинет\" недоступна");
     }
 
     // Метод запускающийся после каждого теста

@@ -29,7 +29,7 @@ public class PersonalAccountEditingTest {
     private static ChromeDriver webDriver;
 
     // Создаём экземпляр логера
-    private static Logger logger = LoggerFactory.getLogger(AuthorizationTest.class);
+    private static Logger logger = LoggerFactory.getLogger(PersonalAccountEditingTest.class);
 
     // Создаём список элементов меню для десктопной версии сайта
     private static List<WebElement> menuList;

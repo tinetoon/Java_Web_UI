@@ -164,7 +164,7 @@ public class PersonalAccountEditingTest {
         logger.debug("\n[DEBUG] Тестовые учётные данные - Компания: АО \"МЭС\"");
 
         // Получаем список элементов меню
-//        menuList.clear();
+//        menuList.clear(); - вызывает exception, так как ни данный момент menuList пуст
         menuList = webDriver
                 .findElements(By
                         .xpath("//div[@class=\"account_menu hide_mobile\"]//span[@class=\"account_menu__name\"]"));
@@ -179,7 +179,7 @@ public class PersonalAccountEditingTest {
         // Очищаем поля, заполняем новыми значениями и сохраняем
         fieldCompany.clear();
         fieldCompany.sendKeys("АО \"МЭС\"");
-        fieldCompany.submit();
+        fieldCompany.submit(); // Используется submit(), так как нет возможности выполнить клик по кнопке "Сохранить настройки"
 
         // Получаем список элементов меню
         menuList.clear();
@@ -187,7 +187,7 @@ public class PersonalAccountEditingTest {
                 .findElements(By
                         .xpath("//div[@class=\"account_menu hide_mobile\"]//span[@class=\"account_menu__name\"]"));
 
-        // Возвращаемся на страницу "Личный кабинет"
+        // Возвращаемся на страницу "Личный кабинет" (!!! Исправить прямое обращение по номеру пункта меню)
 //        webDriver.findElement(By.xpath("//a[.='Личный кабинет']")).click();
         menuList.get(3).click();
 
@@ -231,7 +231,7 @@ public class PersonalAccountEditingTest {
                 .findElements(By
                         .xpath("//div[@class=\"account_menu hide_mobile\"]//span[@class=\"account_menu__name\"]"));
 
-        // Возвращаемся на страницу "Личный кабинет"
+        // Возвращаемся на страницу "Личный кабинет" (!!! Исправить прямое обращение по номеру пункта меню)
         menuList.get(3).click();
 
         // Ожидание загрузки ссылки "Личный кабинет"
@@ -257,9 +257,9 @@ public class PersonalAccountEditingTest {
         // Возвращаемся на страницу "Личный кабинет"
         menuList.get(9).click();
 
-        // Устанавливаем паузу 5 секунд
+        // Устанавливаем паузу 2 секунды (!!! необходимо разобраться с ожиданиями)
         try {
-            Thread.sleep(5000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

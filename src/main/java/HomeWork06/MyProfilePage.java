@@ -12,12 +12,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class MyProfilePage extends BaseClassForPages {
 
-    // Конструктор класса
-    public MyProfilePage(ChromeDriver webDriver) {
-        super(webDriver);
-    }
-
     // Поля класса (!!! Уточнить необходимость приватности полей)
+
+    // Объект меню
+    SidebarPage sidebarPage;
+
     // Заголовок "Имя пользователя"
     @FindBy(xpath = "//h1[@class=\"simple_page__name\"]")
     public WebElement h1Username;
@@ -29,6 +28,12 @@ public class MyProfilePage extends BaseClassForPages {
     // Поле "Должность:"
     @FindBy(xpath = "//p[contains(., 'Должность')]/span")
     public WebElement spanPositionName;
+
+    // Конструктор класса
+    public MyProfilePage(ChromeDriver webDriver) {
+        super(webDriver);
+        sidebarPage = new SidebarPage(webDriver);
+    }
 
     // Метод возвращающий имя пользователя
     public String getUsername() {

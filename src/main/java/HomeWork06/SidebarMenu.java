@@ -13,10 +13,10 @@ import java.util.List;
  * Дата создания: 14.12.2021
  */
 
-public class SidebarPage extends BaseClassForPages {
+public class SidebarMenu extends BaseClassForPages {
 
     // Конструктор класса
-    public SidebarPage(ChromeDriver webDriver) {
+    public SidebarMenu(ChromeDriver webDriver) {
         super(webDriver);
     }
 

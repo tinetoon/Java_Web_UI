@@ -13,7 +13,7 @@ import org.openqa.selenium.support.FindBy;
 public class ProfileSettingsPage extends BaseClassForPages {
 
     // Объект меню
-    SidebarPage sidebarPage;
+    SidebarMenu sidebarMenu;
 
     // Наименование страницы "Редактирование профиля"
     @FindBy(xpath = "//h1[@class=\"simple_page__name\"]")
@@ -30,17 +30,21 @@ public class ProfileSettingsPage extends BaseClassForPages {
     // Конструктор класса
     public ProfileSettingsPage(ChromeDriver webDriver) {
         super(webDriver);
-        sidebarPage = new SidebarPage(webDriver);
+        sidebarMenu = new SidebarMenu(webDriver);
     }
 
     // Метод заполнения поля "Компания"
     public void fillCompany(String companyName) {
+        fieldCompany.clear();
         fieldCompany.sendKeys(companyName);
+        fieldCompany.submit();
     }
 
     // Метод заполнения поля "Должность"
     public void fillPosition(String positionName) {
+        fieldPosition.clear();
         fieldPosition.sendKeys(positionName);
+        fieldPosition.submit();
     }
 
     // Геттер наименования страницы

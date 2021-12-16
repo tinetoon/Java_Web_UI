@@ -15,7 +15,7 @@ public class MyProfilePage extends BaseClassForPages {
     // Поля класса (!!! Уточнить необходимость приватности полей)
 
     // Объект меню
-    SidebarPage sidebarPage;
+    SidebarMenu sidebarMenu;
 
     // Заголовок "Имя пользователя"
     @FindBy(xpath = "//h1[@class=\"simple_page__name\"]")
@@ -32,7 +32,7 @@ public class MyProfilePage extends BaseClassForPages {
     // Конструктор класса
     public MyProfilePage(ChromeDriver webDriver) {
         super(webDriver);
-        sidebarPage = new SidebarPage(webDriver);
+        sidebarMenu = new SidebarMenu(webDriver);
     }
 
     // Метод возвращающий имя пользователя

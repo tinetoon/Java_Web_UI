@@ -36,17 +36,19 @@ public class Page_05_ProfileEdit extends BaseClassForPages {
     }
 
     // Метод заполнения поля "Компания"
-    public void fillCompany(String companyName) {
+    public Page_05_ProfileEdit fillCompany(String companyName) {
         fieldCompany.clear();
         fieldCompany.sendKeys(companyName);
         fieldCompany.submit();
+        return this;
     }
 
     // Метод заполнения поля "Должность"
-    public void fillPosition(String positionName) {
+    public Page_05_ProfileEdit fillPosition(String positionName) {
         fieldPosition.clear();
         fieldPosition.sendKeys(positionName);
         fieldPosition.submit();
+        return this;
     }
 
     // Геттер наименования страницы

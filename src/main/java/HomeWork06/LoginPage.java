@@ -35,6 +35,14 @@ public class LoginPage extends BaseClassForPages {
     @FindBy(xpath = "//button[@type=\"submit\"]")
     public WebElement buttonEntry;
 
+    // Уведомление "Заполните e-mail"
+    @FindBy(id = "email-error")
+    private WebElement labelEmailError;
+
+    // Уведомление "Заполните пароль"
+    @FindBy(id = "password-error")
+    private WebElement labelPasswordError;
+
     // Метод заполнения поля "E-mail"
     public void fillEmail(String email) {
         inputEmail.sendKeys(email);
@@ -51,5 +59,13 @@ public class LoginPage extends BaseClassForPages {
         fillPassword(password);
         buttonEntry.click();
         return new Page_04_Profile(getWebDriver()); // Возвращает страницу "Мой профиль"
+    }
+
+    // Геттеры на уведомления
+    public WebElement getLabelEmailError() {
+        return labelEmailError;
+    }
+    public WebElement getLabelPasswordError() {
+        return labelPasswordError;
     }
 }

@@ -85,8 +85,8 @@ public class KommersantRuObjectTest {
     }
 
     @Test
-    @DisplayName("02 Проверка авторизации на сайте")
-    void authorization() {
+    @DisplayName("02 Позитивная проверка авторизации на сайте")
+    void PositiveAuthorizationCheck() {
 
         logger.info("\n[INFO] Проверка авторизации в личном кабинете");
         logger.debug("\n[DEBUG] Проверяем доступность страницы авторизации");
@@ -107,6 +107,27 @@ public class KommersantRuObjectTest {
         logger.debug("\n[DEBUG] Проверяем имя пользователя \"qr\" на странице ЛК");
         Assertions.assertEquals(page04Profile.getUsername(), "qr",
                 "Имя пользователя не соответствует значению по умолчанию");
+    }
+
+    @Test
+    @DisplayName("03 Негативная проверка авторизации на сайте (пустые поля)")
+    void NegativeAuthorizationCheck() {
+
+        logger.info("\n[INFO] Проверка возможности авторизации в личном кабинете с пустыми полями e-mail & password");
+        Assertions
+                .assertDoesNotThrow(()-> webDriver
+                                .navigate()
+                                .to("https://www.kommersant.ru/lk/login"),
+                        "Страница авторизации недоступна");
+
+        logger.debug("\n[DEBUG] Создаём экземпляр страницы авторизации");
+        LoginPage loginPage = new LoginPage(webDriver);
+
+        logger.info("\n[INFO] Переходим в личный кабинет" +
+                "\n[INFO] Поля e-mail & password оставляем не заполненными");
+        loginPage.loginToYourAccount("","");
+        Assertions.assertEquals(true, loginPage.getLabelEmailError().isDisplayed());
+        Assertions.assertEquals(true, loginPage.getLabelPasswordError().isDisplayed());
     }
 
     @Nested
@@ -251,6 +272,32 @@ public class KommersantRuObjectTest {
             page_09_feedback = new Page_09_Feedback(webDriver);
             Assertions.assertEquals("https://www.kommersant.ru/LK/Feedback",
                     page_02_bookmarks.getWebDriver().getCurrentUrl());
+        }
+
+        @Test
+        @DisplayName("03 Проверка редактирования поля \"Компания\" в ЛК")
+        void editingTheCompanyField() {
+            page_04_profile.getSidebarMenu().goToSidebarMenuItem(5);
+            page_05_profileEdit = new Page_05_ProfileEdit(webDriver);
+            page_05_profileEdit
+                    .fillCompany("АО \"МЭС\"")
+                    .getSidebarMenu()
+                    .goToSidebarMenuItem(4);
+            Assertions.assertEquals("АО \"МЭС\"",
+                    page_04_profile.getCompanyName());
+        }
+
+        @Test
+        @DisplayName("04 Проверка редактирования поля \"Должность\" в ЛК")
+        void editingThePositionField() {
+            page_04_profile.getSidebarMenu().goToSidebarMenuItem(5);
+            page_05_profileEdit = new Page_05_ProfileEdit(webDriver);
+            page_05_profileEdit
+                    .fillPosition("Начальник ПТО")
+                    .getSidebarMenu()
+                    .goToSidebarMenuItem(4);
+            Assertions.assertEquals("Начальник ПТО",
+                    page_04_profile.getPositionName());
         }
 
         // Постусловие - выход из учётной записи

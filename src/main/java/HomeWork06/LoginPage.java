@@ -1,5 +1,6 @@
 package HomeWork06;
 
+import HomeWork06.PersonalAccountPages.Page_04_Profile;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -45,10 +46,10 @@ public class LoginPage extends BaseClassForPages {
     }
 
     // Метод входа в ЛК
-    public MyProfilePage loginToYourAccount(String email, String password) {
+    public Page_04_Profile loginToYourAccount(String email, String password) {
         fillEmail(email);
         fillPassword(password);
         buttonEntry.click();
-        return new MyProfilePage(getWebDriver()); // Возвращает страницу "Мой профиль"
+        return new Page_04_Profile(getWebDriver()); // Возвращает страницу "Мой профиль"
     }
 }

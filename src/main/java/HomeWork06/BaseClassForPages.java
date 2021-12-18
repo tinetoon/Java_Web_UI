@@ -1,5 +1,6 @@
 package HomeWork06;
 
+import HomeWork06.PageElements.SidebarMenu;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
  * Дата создания: 14.12.2021
  */
 
-public class BaseClassForPages {
+public abstract class BaseClassForPages {
 
     // Создаём экземпляр драйвера для возможности доступа к нему по всему классу (!!! приватность нужна или нет)
     private ChromeDriver webDriver;

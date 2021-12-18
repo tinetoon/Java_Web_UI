@@ -1,5 +1,7 @@
-package HomeWork06;
+package HomeWork06.PersonalAccountPages;
 
+import HomeWork06.BaseClassForPages;
+import HomeWork06.PageElements.SidebarMenu;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -10,12 +12,12 @@ import org.openqa.selenium.support.FindBy;
  * Дата создания: 14.12.2021
  */
 
-public class MyProfilePage extends BaseClassForPages {
+public class Page_04_Profile extends BaseClassForPages {
 
     // Поля класса (!!! Уточнить необходимость приватности полей)
 
     // Объект меню
-    SidebarMenu sidebarMenu;
+    private SidebarMenu sidebarMenu;
 
     // Заголовок "Имя пользователя"
     @FindBy(xpath = "//h1[@class=\"simple_page__name\"]")
@@ -30,7 +32,7 @@ public class MyProfilePage extends BaseClassForPages {
     public WebElement spanPositionName;
 
     // Конструктор класса
-    public MyProfilePage(ChromeDriver webDriver) {
+    public Page_04_Profile(ChromeDriver webDriver) {
         super(webDriver);
         sidebarMenu = new SidebarMenu(webDriver);
     }
@@ -48,5 +50,10 @@ public class MyProfilePage extends BaseClassForPages {
     // Метод возвращающий наименование должности
     public String getPositionName() {
         return spanPositionName.getText();
+    }
+
+    // Геттер на меню
+    public SidebarMenu getSidebarMenu() {
+        return sidebarMenu;
     }
 }

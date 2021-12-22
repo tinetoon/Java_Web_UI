@@ -3,6 +3,7 @@ package TestHomeWork06;
 import HomeWork06.LoginPage;
 import HomeWork06.PageElements.SidebarMenu;
 import HomeWork06.PersonalAccountPages.*;
+import HomeWork06.TestData.TestData;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,6 +36,9 @@ public class KommersantRuObjectTest {
 
     // Создаём экземпляр логера
     private static Logger logger = LoggerFactory.getLogger(KommersantRuObjectTest.class);
+
+    // Создаём экземпляр тестовых данных
+    private static TestData testData = new TestData();
 
     @BeforeAll
     static void registerDriver() {
@@ -96,13 +100,15 @@ public class KommersantRuObjectTest {
                                 .to("https://www.kommersant.ru/lk/login"),
                         "Страница авторизации недоступна");
 
+
+
         logger.debug("\n[DEBUG] Создаём экземпляр страницы авторизации");
         LoginPage loginPage = new LoginPage(webDriver);
 
         logger.info("\n[INFO] Переходим в личный кабинет");
         logger.debug("\n[DEBUG] Заполняем поля \"Ваш e-mail\" и \"Введите пароль\"" +
                 "\n[DEBUG] Тестовые учётные данные: логин tinetoon@mail.ru, пароль te$st");
-        Page_04_Profile page04Profile = loginPage.loginToYourAccount("tinetoon@mail.ru", "te$st");
+        Page_04_Profile page04Profile = loginPage.loginToYourAccount(testData.getLOGIN(), testData.getPASSWORD());
 
         logger.debug("\n[DEBUG] Проверяем имя пользователя \"qr\" на странице ЛК");
         Assertions.assertEquals(page04Profile.getUsername(), "qr",
@@ -162,7 +168,7 @@ public class KommersantRuObjectTest {
             logger.info("\n[INFO] Переходим в личный кабинет");
             logger.debug("\n[DEBUG] Заполняем поля \"Ваш e-mail\" и \"Введите пароль\"" +
                     "\n[DEBUG] Тестовые учётные данные: логин tinetoon@mail.ru, пароль te$st");
-            page_04_profile = loginPage.loginToYourAccount("tinetoon@mail.ru", "te$st");
+            page_04_profile = loginPage.loginToYourAccount(testData.getLOGIN(), testData.getPASSWORD());
 
             logger.debug("\n[DEBUG] Имя пользователя по умолчанию - \"qr\"");
             Assertions
@@ -280,10 +286,10 @@ public class KommersantRuObjectTest {
             page_04_profile.getSidebarMenu().goToSidebarMenuItem(5);
             page_05_profileEdit = new Page_05_ProfileEdit(webDriver);
             page_05_profileEdit
-                    .fillCompany("АО \"МЭС\"")
+                    .fillCompany(testData.getCOMPANY())
                     .getSidebarMenu()
                     .goToSidebarMenuItem(4);
-            Assertions.assertEquals("АО \"МЭС\"",
+            Assertions.assertEquals(testData.getCOMPANY(),
                     page_04_profile.getCompanyName());
         }
 
@@ -293,10 +299,10 @@ public class KommersantRuObjectTest {
             page_04_profile.getSidebarMenu().goToSidebarMenuItem(5);
             page_05_profileEdit = new Page_05_ProfileEdit(webDriver);
             page_05_profileEdit
-                    .fillPosition("Начальник ПТО")
+                    .fillPosition(testData.getPOSITION())
                     .getSidebarMenu()
                     .goToSidebarMenuItem(4);
-            Assertions.assertEquals("Начальник ПТО",
+            Assertions.assertEquals(testData.getPOSITION(),
                     page_04_profile.getPositionName());
         }
 

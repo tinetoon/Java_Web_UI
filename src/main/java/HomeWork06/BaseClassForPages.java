@@ -18,7 +18,7 @@ public abstract class BaseClassForPages {
     // Создаём конструктор
     public BaseClassForPages(ChromeDriver webDriver) {
         this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this);
+        PageFactory.initElements(webDriver, this); // !!! разобраться с кодом
     }
 
     public ChromeDriver getWebDriver() {

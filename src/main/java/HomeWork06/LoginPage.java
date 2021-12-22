@@ -1,6 +1,7 @@
 package HomeWork06;
 
 import HomeWork06.PersonalAccountPages.Page_04_Profile;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -18,22 +19,21 @@ public class LoginPage extends BaseClassForPages {
         super(webDriver);
     }
 
-    // Создаём поля класса
     // Заголовок "Вход в личный кабинет"
     @FindBy(xpath = "//h1[@class=\"lk_popup__name\"]")
-    public WebElement h1Heading;
+    private WebElement h1Heading;
 
     // Поле ввода "E-mail"
     @FindBy(id = "email")
-    public WebElement inputEmail;
+    private WebElement inputEmail;
 
     // Поле ввода "Пароль"
     @FindBy(id = "password")
-    public WebElement inputPassword;
+    private WebElement inputPassword;
 
     // Кнопка "Войти"
     @FindBy(xpath = "//button[@type=\"submit\"]")
-    public WebElement buttonEntry;
+    private WebElement buttonEntry;
 
     // Уведомление "Заполните e-mail"
     @FindBy(id = "email-error")
@@ -44,11 +44,13 @@ public class LoginPage extends BaseClassForPages {
     private WebElement labelPasswordError;
 
     // Метод заполнения поля "E-mail"
+    @Step("Выполняем заполнение поля \"E-mail\"") // Добавляем в отчёт информацию с помощью Assertj
     public void fillEmail(String email) {
         inputEmail.sendKeys(email);
     }
 
     // Метод заполнения поля "Пароль"
+    @Step("Выполняем заполнение поля \"Пароль\"") // Добавляем в отчёт информацию с помощью Assertj
     public void fillPassword(String password) {
         inputPassword.sendKeys(password);
     }

@@ -14,22 +14,20 @@ import org.openqa.selenium.support.FindBy;
 
 public class Page_04_Profile extends BaseClassForPages {
 
-    // Поля класса (!!! Уточнить необходимость приватности полей)
-
     // Объект меню
     private SidebarMenu sidebarMenu;
 
     // Заголовок "Имя пользователя"
     @FindBy(xpath = "//h1[@class=\"simple_page__name\"]")
-    public WebElement h1Username;
+    private WebElement h1Username;
 
     // Поле "Компания:"
     @FindBy(xpath = "//p[contains(., 'Компания')]/span")
-    public WebElement spanCompanyName;
+    private WebElement spanCompanyName;
 
     // Поле "Должность:"
     @FindBy(xpath = "//p[contains(., 'Должность')]/span")
-    public WebElement spanPositionName;
+    private WebElement spanPositionName;
 
     // Конструктор класса
     public Page_04_Profile(ChromeDriver webDriver) {
